@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import {
-  KeyboardAvoidingView,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
   Text,
-  Platform
+  TextInput,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  StyleSheet
 } from "react-native";
 import * as deckActions from "../redux/actions";
 import { bindActionCreators } from "redux";
 import { generateUID } from "../utils/helpers";
 import { saveDeck } from "../utils/api";
+import { white, black } from "../utils/colors";
 
 // Add a deck with title
 class AddCard extends React.Component {
@@ -22,7 +22,9 @@ class AddCard extends React.Component {
     let deckId = generateUID();
     this.props.actions.addDeck(deckId, this.state.nameOfDeck);
     saveDeck(deckId, this.state.nameOfDeck);
-    // Navigate to the newly created deck i.e Deck.js
+    this.props.navigation.navigate("Deck", {
+      id: deckId
+    });
   };
 
   handleOnchange = event => {
@@ -36,21 +38,60 @@ class AddCard extends React.Component {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
-        style={}
+        style={styles.container}
       >
-        <Text style={}>Name your new deck!</Text>
+        <Text style={styles.question}>Name your new deck!</Text>
         <TextInput
           value={nameOfDeck}
-          style={}
+          style={styles.input}
           onChangeText={this.handleOnchange}
         />
-        <TouchableOpacity style={} onPress={this.handleOnSubmit}>
-          <Text style={}>Create Deck</Text>
+        <TouchableOpacity
+          style={styles.submitBtn}
+          onPress={this.handleOnSubmit}
+        >
+          <Text style={styles.submitBtnText}>Create Deck</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  question: {
+    fontSize: 30,
+    marginLeft: 20,
+    marginRight: 20,
+    color: black
+  },
+  input: {
+    width: 250,
+    height: 44,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: black,
+    margin: 20
+  },
+  submitBtn: {
+    backgroundColor: black,
+    padding: 10,
+    borderRadius: 0,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40,
+    marginBottom: 60
+  },
+  submitBtnText: {
+    color: white,
+    fontSize: 22,
+    textAlign: "center"
+  }
+});
 
 function mapDispatchToProps(dispatch) {
   return {

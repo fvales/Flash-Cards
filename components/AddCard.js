@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import {
-  KeyboardAvoidingView,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
   Text,
-  Platform
+  TextInput,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  StyleSheet
 } from "react-native";
 import * as deckActions from "../redux/actions";
 import { bindActionCreators } from "redux";
 import { saveCard } from "../utils/api";
+import { white, black } from "../utils/colors";
 
 // Add card with question and answer to the deck
 class AddCard extends React.Component {
@@ -25,7 +25,6 @@ class AddCard extends React.Component {
       this.state.answer
     );
     saveCard(this.props.deckId, this.state.question, this.state.answer);
-    // Navigate to the newly created deck i.e Deck.js
   };
 
   handleOnchangeQuestion = event => {
@@ -45,27 +44,66 @@ class AddCard extends React.Component {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
-        style={}
+        style={styles.container}
       >
-        <Text style={}>Enter Question!</Text>
+        <Text style={styles.label}>Enter Question!</Text>
         <TextInput
           value={question}
-          style={}
+          style={styles.input}
           onChangeText={this.handleOnchangeQuestion}
         />
-        <Text style={}>Enter Answer!</Text>
+        <Text style={styles.label}>Enter Answer!</Text>
         <TextInput
           value={answer}
-          style={}
+          style={styles.input}
           onChangeText={this.handleOnchangeAnswer}
         />
-        <TouchableOpacity style={} onPress={this.handleOnSubmit}>
-          <Text style={}>Add card</Text>
+        <TouchableOpacity
+          style={styles.submitBtn}
+          onPress={this.handleOnSubmit}
+        >
+          <Text style={styles.submitBtnText}>Add card</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 40
+  },
+  question: {
+    fontSize: 18,
+    alignSelf: "flex-start",
+    color: black
+  },
+  input: {
+    width: 250,
+    height: 44,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: black,
+    marginBottom: 15
+  },
+  submitBtn: {
+    backgroundColor: black,
+    padding: 10,
+    borderRadius: 0,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40,
+    marginBottom: 100
+  },
+  submitBtnText: {
+    color: white,
+    fontSize: 22,
+    textAlign: "center"
+  }
+});
 
 function mapStateToProps({}, { match }) {
   const deckId = match.params.id;

@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, View } from "react-native";
+import { View, FlatList, StyleSheet, Text } from "react-native";
 import { connect } from "react-redux";
 import * as deckActions from "../redux/actions";
 import { bindActionCreators } from "redux";
@@ -30,7 +30,7 @@ class DeckList extends React.Component {
 
     return (
       // Add Styling
-      <View>
+      <View style={styles.list}>
         <FlatList
           data={Object.keys(decks).map(id => {
             return { key: id };
@@ -43,6 +43,13 @@ class DeckList extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  list: {
+    flex: 1,
+    alignSelf: "stretch"
+  }
+});
 
 function mapStateToProps(decks) {
   return {
