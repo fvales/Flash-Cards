@@ -11,8 +11,7 @@ This project is a mobile app that allows users to study using collections of fla
 - Users can quiz themselves on a specific deck and receive a score once they're done.
 - Users receive a notification to remind themselves to study if they haven't already for that day.
 
-## Run the project
+## Project Setup
 
-- install all project dependencies with npm install
-- start the development server with npm start
-- Open http://localhost:3000 to view it in the browser
+- install all project dependencies with yarn install
+- start the development server with yarn start
