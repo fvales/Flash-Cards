@@ -2,7 +2,6 @@ import React from "react";
 import { TouchableOpacity, StyleSheet, Text, Animated } from "react-native";
 import * as deckActions from "../redux/actions";
 import { bindActionCreators } from "redux";
-import { Text, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import { black, gray, white } from "../utils/colors";
 
 // Add card with question and answer to the deck

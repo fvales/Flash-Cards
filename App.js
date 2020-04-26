@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { StatusBar, View } from "react-native";
 import { setLocalNotification } from "./utils/helpers";
-import reducer from "./reducers";
+import reducer from "./redux/reducers";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { Constants } from "expo";
@@ -20,7 +20,7 @@ import Quiz from "./components/Quiz";
 const store = createStore(reducer);
 
 // Function to add status bar
-FlashCardStatusBar = ({ backgroundColor, ...props }) => {
+const FlashCardStatusBar = ({ backgroundColor, ...props }) => {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
