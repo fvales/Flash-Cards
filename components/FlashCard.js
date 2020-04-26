@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { red, white, black, blue } from "../utils/colors";
+import { red, white, black, blue, orange } from "../utils/colors";
 
 class FlashCard extends React.Component {
   state = {
@@ -84,5 +84,3 @@ const styles = StyleSheet.create({
 });
 
 export default FlashCard;
-
-const styles = StyleSheet.create({});

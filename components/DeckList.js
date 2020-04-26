@@ -6,14 +6,13 @@ import { bindActionCreators } from "redux";
 import { getDecks } from "../utils/api";
 import { AppLoading } from "expo";
 import DeckListCard from "./DeckListCard";
-
 // To Show List Of Decks
 class DeckList extends React.Component {
   state = {
     loading: true
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getDecks()
       .then(decks => this.props.actions.receiveDecks(decks))
       .then(
@@ -24,7 +23,7 @@ class DeckList extends React.Component {
   }
 
   render() {
-    if (loading) {
+    if (this.state.loading) {
       return <AppLoading />;
     }
 
@@ -32,7 +31,7 @@ class DeckList extends React.Component {
       // Add Styling
       <View style={styles.list}>
         <FlatList
-          data={Object.keys(decks).map(id => {
+          data={Object.keys(this.props.decks).map(id => {
             return { key: id };
           })}
           renderItem={({ item }) => (

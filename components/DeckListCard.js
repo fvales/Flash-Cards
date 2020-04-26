@@ -7,7 +7,7 @@ import { black, white, gray } from "../utils/colors";
 class DeckListCard extends React.Component {
   render() {
     // When Clicked, Navigate to Deck
-    handleOnClick = () => {
+    const handleOnClick = () => {
       this.props.navigation.navigate("Deck", {
         id: this.props.id
       });

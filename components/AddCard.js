@@ -10,7 +10,7 @@ import * as deckActions from "../redux/actions";
 import { bindActionCreators } from "redux";
 import { saveCard } from "../utils/api";
 import { white, black } from "../utils/colors";
-
+import {connect} from "react-redux";
 // Add card with question and answer to the deck
 class AddCard extends React.Component {
   state = {

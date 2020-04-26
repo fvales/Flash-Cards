@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { black } from "../utils/colors";
 import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
-import FlashCard from "./FlashCards";
+import FlashCard from "./FlashCard";
 import Score from "./Score";
-
+import {connect} from "react-redux";
 class Quiz extends React.Component {
   state = {
     totalNumOfCorrectAns: 0,

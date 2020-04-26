@@ -3,7 +3,7 @@ import { TouchableOpacity, StyleSheet, Text, Animated } from "react-native";
 import * as deckActions from "../redux/actions";
 import { bindActionCreators } from "redux";
 import { black, gray, white } from "../utils/colors";
-
+import {connect} from "react-redux";
 // Add card with question and answer to the deck
 class Deck extends React.Component {
   state = { opacity: new Animated.Value(0) };

@@ -11,7 +11,7 @@ import { bindActionCreators } from "redux";
 import { generateUID } from "../utils/helpers";
 import { saveDeck } from "../utils/api";
 import { white, black } from "../utils/colors";
-
+import {connect} from "react-redux";
 // Add a deck with title
 class AddCard extends React.Component {
   state = {

@@ -3,10 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { black, white } from "../utils/colors";
 
 function Score(props) {
-  navigateToDeck = () => {
-    // Navigate to deck
-    this.props.navigation.navigate("Deck", { id: deckId });
-  };
+  
+
+
   return (
     <View style={styles.center}>
       <Text style={styles.score}>Correct: {props.correct}</Text>
@@ -24,13 +23,17 @@ function Score(props) {
 
       <TouchableOpacity
         style={[styles.btn, { backgroundColor: white, marginTop: 25 }]}
-        onPress={this.navigateToDeck}
+        onPress={navigateToDeck}
       >
         <Text style={[styles.btnText, { color: black }]}>Back to Deck</Text>
       </TouchableOpacity>
     </View>
   );
 }
+const navigateToDeck = () => {
+  // Navigate to deck
+  this.props.navigation.navigate("Deck", { id: deckId });
+};
 
 const styles = StyleSheet.create({
   center: {

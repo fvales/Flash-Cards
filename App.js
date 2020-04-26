@@ -1,14 +1,14 @@
 import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import {NavigationContainer} from "@react-navigation/native";
 import React from "react";
 import { StatusBar, View } from "react-native";
 import { setLocalNotification } from "./utils/helpers";
 import reducer from "./redux/reducers";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { Constants } from "expo";
+import Constants from 'expo-constants';
 import { white, black } from "./utils/colors";
 
 import AddDeck from "./components/AddDeck";
@@ -85,7 +85,7 @@ export default class App extends React.Component {
               initialRouteName="Home"
               screenOptions={{
                 headerStyle: {
-                  backgroundColor: "#f4511e"
+                  backgroundColor: "#000"
                 },
                 headerTintColor: "#fff",
                 headerTitleStyle: {
