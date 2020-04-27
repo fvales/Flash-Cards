@@ -16,6 +16,7 @@ import AddCard from "./components/AddCard";
 import DeckList from "./components/DeckList";
 import Deck from "./components/Deck";
 import Quiz from "./components/Quiz";
+import DeckListCard from "./components/DeckListCard";
 
 const store = createStore(reducer);
 
@@ -34,9 +35,9 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
+      initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: "#e91e63",
+        activeTintColor: "#000",
         labelStyle: {
           fontSize: 20,
           paddingBottom: 10,
@@ -66,6 +67,7 @@ function MyTabs() {
 const Stack = createStackNavigator();
 
 export default class App extends React.Component {
+
   componentDidMount() {
     setLocalNotification();
   }
@@ -93,10 +95,20 @@ export default class App extends React.Component {
                 }
               }}
             >
-              <Stack.Screen
+            <Stack.Screen
                 name="Home"
-                component={DeckList}
+                component={MyTabs}
                 options={{ title: "Home" }}
+              />
+              <Stack.Screen
+                name="DeckListCard"
+                component={DeckListCard}
+                options={{ title: "Card" }}
+              />
+              <Stack.Screen
+                name="DeckList"
+                component={DeckList}
+                options={{ title: "Decks" }}
               />
               <Stack.Screen
                 name="AddCard"

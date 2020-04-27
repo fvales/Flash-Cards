@@ -5,14 +5,15 @@ import { black, white, gray } from "../utils/colors";
 
 // To Show a Deck in a DeckList
 class DeckListCard extends React.Component {
-  render() {
-    // When Clicked, Navigate to Deck
-    const handleOnClick = () => {
-      this.props.navigation.navigate("Deck", {
-        id: this.props.id
-      });
-    };
 
+  // When Clicked, Navigate to Deck
+  handleOnClick() {
+    this.props.navigation.navigate("Deck", {
+      id: this.props.id
+    });
+  };
+
+  render() {
     // Add Styling
     return (
       <TouchableOpacity style={styles.item} onPress={this.handleOnClick}>
@@ -47,11 +48,14 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(decks, { id }) {
+function mapStateToProps(decks, {props}) {
+  const { id, navigation } = props
   return {
-    title: decks[id].title,
-    totalNumOfCards: decks[id].questions.length
-  };
+      id,
+      title: decks[id].title,
+      totalNumOfCards: decks[id].questions.length,
+      navigation
+  }
 }
 
 export default connect(mapStateToProps, null)(DeckListCard);

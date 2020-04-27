@@ -32,11 +32,7 @@ let decks = {
   }
 };
 
-function setData() {
+export function setData() {
   AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks));
   return decks;
-}
-
-export function formatDecksResults(results) {
-  return results === null ? setData() : JSON.parse(results);
 }

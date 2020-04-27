@@ -28,7 +28,6 @@ class DeckList extends React.Component {
     }
 
     return (
-      // Add Styling
       <View style={styles.list}>
         <FlatList
           data={Object.keys(this.props.decks).map(id => {
@@ -51,6 +50,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks) {
+  console.log (decks);
   return {
     decks
   };

@@ -84,12 +84,13 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps({ decks }, { match }) {
-  const deckId = match.params.id;
+function mapStateToProps({ decks }, { navigation, route }) {
+  const deckId = route.params.id;
   return {
     deck: decks[deckId],
     totalNumOfCards: deck.questions.length,
-    deckId
+    deckId,
+    navigation
   };
 }
 

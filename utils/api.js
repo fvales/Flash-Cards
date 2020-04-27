@@ -1,10 +1,14 @@
 import { AsyncStorage } from "react-native";
-import { DECKS_KEY } from "./_Data";
+import { DECKS_KEY, setData } from "./_Data";
 
 export function getDecks() {
-  return AsyncStorage.getItem(DECKS_KEY).then(results => {
-    return JSON.parse(results);
-  });
+  AsyncStorage.removeItem(DECKS_KEY);
+  return AsyncStorage.getItem(DECKS_KEY).then((results) => {
+    if (results === null)
+      return setData();
+    else
+      return JSON.parse(results);
+  })
 }
 
 export function saveDeck(key, deck) {

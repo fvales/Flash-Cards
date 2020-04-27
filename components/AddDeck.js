@@ -20,16 +20,14 @@ class AddCard extends React.Component {
 
   handleOnSubmit = () => {
     let deckId = generateUID();
-    this.props.actions.addDeck(deckId, this.state.nameOfDeck);
-    saveDeck(deckId, this.state.nameOfDeck);
+    let newDeck = {
+      title: this.state.nameOfDeck,
+      questions: []
+    }
+    this.props.actions.addDeck(deckId, newDeck);
+    saveDeck(deckId, newDeck);
     this.props.navigation.navigate("Deck", {
       id: deckId
-    });
-  };
-
-  handleOnchange = event => {
-    this.setState({
-      nameOfDeck: event.target.value
     });
   };
 
@@ -42,9 +40,11 @@ class AddCard extends React.Component {
       >
         <Text style={styles.question}>Name your new deck!</Text>
         <TextInput
-          value={nameOfDeck}
+          value={this.state.nameOfDeck}
           style={styles.input}
-          onChangeText={this.handleOnchange}
+          onChangeText={(nameOfDeck) => this.setState({
+            nameOfDeck: nameOfDeck
+          })}
         />
         <TouchableOpacity
           style={styles.submitBtn}

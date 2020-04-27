@@ -27,18 +27,6 @@ class AddCard extends React.Component {
     saveCard(this.props.deckId, this.state.question, this.state.answer);
   };
 
-  handleOnchangeQuestion = event => {
-    this.setState({
-      question: event.target.value
-    });
-  };
-
-  handleOnchangeAnswer = event => {
-    this.setState({
-      answer: event.target.value
-    });
-  };
-
   render() {
     // Add styling
     return (
@@ -50,13 +38,17 @@ class AddCard extends React.Component {
         <TextInput
           value={question}
           style={styles.input}
-          onChangeText={this.handleOnchangeQuestion}
+          onChangeText={(question) => this.setState({
+            question: question
+          })}
         />
         <Text style={styles.label}>Enter Answer!</Text>
         <TextInput
           value={answer}
           style={styles.input}
-          onChangeText={this.handleOnchangeAnswer}
+          onChangeText={(answer) => this.setState({
+            answer: answer
+          })}
         />
         <TouchableOpacity
           style={styles.submitBtn}
