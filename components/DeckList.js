@@ -30,11 +30,9 @@ class DeckList extends React.Component {
     return (
       <View style={styles.list}>
         <FlatList
-          data={Object.keys(this.props.decks).map(id => {
-            return { key: id };
-          })}
-          renderItem={({ item }) => (
-            <DeckListCard key={item.key} id={item.key} />
+          data={Object.keys(this.props.decks).map((id) => {  return { key: id } })}
+          renderItem={({item}) => (
+          <DeckListCard key={item.key} id={item.key}/>
           )}
         />
       </View>
@@ -50,7 +48,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks) {
-  console.log (decks);
   return {
     decks
   };

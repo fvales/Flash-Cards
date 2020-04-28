@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import Constants from 'expo-constants';
 import { white, black } from "./utils/colors";
+import { YellowBox } from 'react-native';
 
 import AddDeck from "./components/AddDeck";
 import AddCard from "./components/AddCard";
@@ -69,6 +70,7 @@ const Stack = createStackNavigator();
 export default class App extends React.Component {
 
   componentDidMount() {
+    YellowBox.ignoreWarnings(['Remote debugger']);
     setLocalNotification();
   }
 

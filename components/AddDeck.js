@@ -13,7 +13,7 @@ import { saveDeck } from "../utils/api";
 import { white, black } from "../utils/colors";
 import {connect} from "react-redux";
 // Add a deck with title
-class AddCard extends React.Component {
+class AddDeck extends React.Component {
   state = {
     nameOfDeck: ""
   };
@@ -93,10 +93,16 @@ const styles = StyleSheet.create({
   }
 });
 
+function mapStateToProps({}, { navigation }) {
+  return {
+    navigation
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(deckActions, dispatch)
   };
 }
 
-export default connect(null, mapDispatchToProps)(AddCard);
+export default connect(mapStateToProps, mapDispatchToProps)(AddDeck);

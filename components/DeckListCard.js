@@ -7,7 +7,7 @@ import { black, white, gray } from "../utils/colors";
 class DeckListCard extends React.Component {
 
   // When Clicked, Navigate to Deck
-  handleOnClick() {
+  handleOnClick = () => {
     this.props.navigation.navigate("Deck", {
       id: this.props.id
     });
@@ -48,8 +48,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(decks, {props}) {
-  const { id, navigation } = props
+function mapStateToProps(decks, {id, navigation}) {
   return {
       id,
       title: decks[id].title,
