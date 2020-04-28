@@ -10,7 +10,6 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import Constants from 'expo-constants';
 import { white, black } from "./utils/colors";
-import { YellowBox } from 'react-native';
 
 import AddDeck from "./components/AddDeck";
 import AddCard from "./components/AddCard";
@@ -70,21 +69,18 @@ const Stack = createStackNavigator();
 export default class App extends React.Component {
 
   componentDidMount() {
-    YellowBox.ignoreWarnings(['Remote debugger']);
     setLocalNotification();
   }
 
   render() {
     return (
+      <Provider store={store}>
       <NavigationContainer>
-        <Provider store={store}>
           <View style={{ flex: 1 }}>
-            {/* Status Bar */}
             <FlashCardStatusBar
               backgroundColor={black}
               barStyle="light-content"
             />
-            {/* Navigation */}
             <Stack.Navigator
               initialRouteName="Home"
               screenOptions={{
@@ -102,11 +98,11 @@ export default class App extends React.Component {
                 component={MyTabs}
                 options={{ title: "Home" }}
               />
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="DeckListCard"
                 component={DeckListCard}
                 options={{ title: "Card" }}
-              />
+              /> */}
               <Stack.Screen
                 name="DeckList"
                 component={DeckList}
@@ -134,8 +130,8 @@ export default class App extends React.Component {
               />
             </Stack.Navigator>
           </View>
-        </Provider>
       </NavigationContainer>
+      </Provider>
     );
   }
 }

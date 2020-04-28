@@ -4,10 +4,10 @@ import { red, white, black, blue, orange } from "../utils/colors";
 
 class FlashCard extends React.Component {
   state = {
-    showAnswer: false
+    showAnswer: false,
   };
 
-  card = this.props.deck[this.prop.currentQuestion];
+  card = this.props.deck !== undefined ? this.props.deck.questions[this.props.currentQuestion] : ''
 
   toggleShowAnswer() {
     this.setState({
@@ -19,7 +19,7 @@ class FlashCard extends React.Component {
     return (
       <View style={styles.center}>
         <Text style={styles.cardText}>
-          {this.state.showAnswer ? card.answer : card.question}
+          {this.state.showAnswer ? this.card.answer : this.card.question}
         </Text>
 
         <TouchableOpacity onPress={this.toggleShowAnswer}>

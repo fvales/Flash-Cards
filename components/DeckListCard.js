@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(decks, {id, navigation}) {
+function mapStateToProps(decks, {navigation, id}) {
   return {
       id,
       title: decks[id].title,

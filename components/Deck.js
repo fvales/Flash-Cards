@@ -22,14 +22,13 @@ class Deck extends React.Component {
   };
 
   componentDidMount() {
-    const { opacity } = this.state;
-    Animated.timing(opacity, { toValue: 1, duration: 1000 }).start();
+    Animated.timing(this.state.opacity, { toValue: 1, duration: 1000 }).start();
   }
 
   render() {
     // Add styling
     return (
-      <Animated.View style={[styles.deck, { opacity }]}>
+      <Animated.View style={[styles.deck, this.state.opacity ]}>
         <Text style={styles.title}>{this.props.deck.title}</Text>
         <Text style={styles.count}>{this.props.totalNumOfCards}</Text>
         <TouchableOpacity
@@ -84,10 +83,11 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps({ decks }, { navigation, route }) {
+function mapStateToProps(decks, { navigation, route }) {
   const deckId = route.params.id;
+  const deck = decks[deckId];
   return {
-    deck: decks[deckId],
+    deck,
     totalNumOfCards: deck.questions.length,
     deckId,
     navigation

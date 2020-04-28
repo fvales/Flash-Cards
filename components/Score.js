@@ -4,7 +4,15 @@ import { black, white } from "../utils/colors";
 
 function Score(props) {
   
+  const navigateToDeck = () => {
+    // Navigate to deck
+    props.navigation.navigate("Deck", { id: deckId });
+  };
 
+  const restart = () => {
+    props.restart();
+    this.navigateToDeck();
+  }
 
   return (
     <View style={styles.center}>
@@ -16,7 +24,7 @@ function Score(props) {
 
       <TouchableOpacity
         style={[styles.btn, { backgroundColor: black, marginTop: 25 }]}
-        onPress={this.props.restart}
+        onPress={this.restart}
       >
         <Text style={styles.btnText}>Restart Quiz</Text>
       </TouchableOpacity>
@@ -30,10 +38,7 @@ function Score(props) {
     </View>
   );
 }
-const navigateToDeck = () => {
-  // Navigate to deck
-  this.props.navigation.navigate("Deck", { id: deckId });
-};
+
 
 const styles = StyleSheet.create({
   center: {

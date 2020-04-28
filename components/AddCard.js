@@ -19,12 +19,16 @@ class AddCard extends React.Component {
   };
 
   handleOnSubmit = () => {
+    const { id } = this.props.route.params;
     this.props.actions.addCard(
-      this.props.deckId,
+      id,
       this.state.question,
       this.state.answer
     );
-    saveCard(this.props.deckId, this.state.question, this.state.answer);
+    saveCard(this.props.id, this.state.question, this.state.answer);
+    this.props.navigation.navigate("Deck", {
+      id: id
+    });
   };
 
   render() {
@@ -36,7 +40,7 @@ class AddCard extends React.Component {
       >
         <Text style={styles.label}>Enter Question!</Text>
         <TextInput
-          value={question}
+          value={this.state.question}
           style={styles.input}
           onChangeText={(question) => this.setState({
             question: question
@@ -44,7 +48,7 @@ class AddCard extends React.Component {
         />
         <Text style={styles.label}>Enter Answer!</Text>
         <TextInput
-          value={answer}
+          value={this.state.answer}
           style={styles.input}
           onChangeText={(answer) => this.setState({
             answer: answer
@@ -97,10 +101,13 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps({}, { match }) {
-  const deckId = match.params.id;
-  return deckId;
-}
+// function mapStateToProps({decks}, { route }) {
+//   const deckId = route.params.id;
+//   return 
+//   {
+//     deckId
+//   };
+// }
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -108,4 +115,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCard);
+export default connect(null, mapDispatchToProps)(AddCard);

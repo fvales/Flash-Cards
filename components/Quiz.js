@@ -15,7 +15,7 @@ class Quiz extends React.Component {
   componentDidMount() {
     clearLocalNotification().then(setLocalNotification);
   }
-
+  
   restart = () => {
     this.setState({
       totalNumOfCorrectAns: 0,
@@ -25,8 +25,8 @@ class Quiz extends React.Component {
   };
 
   handleAnswer = result => {
-    this.setState(state => ({
-      index: state.index + 1,
+    this.setState({
+      currentQuestion: this.state.currentQuestion + 1,
       totalNumOfCorrectAns:
         result === "correct"
           ? this.state.totalNumOfCorrectAns + 1
@@ -35,23 +35,21 @@ class Quiz extends React.Component {
         result === "incorrect"
           ? this.state.totalNumOfIncorrectAns + 1
           : this.state.totalNumOfIncorrectAns
-    }));
+    });
   };
 
   render() {
-    const showCard =
-      this.state.currentQuestion < this.props.totalNumOfCards ? true : false;
-
+    console.log (this.state.currentQuestion);
     // Add styling
     return (
       <View style={styles.center}>
-        <Text style={styles.count}>
-          {showCard
+        {/* <Text style={styles.count}>
+          {(this.state.currentQuestion < this.props.totalNumOfCards)
             ? this.state.currentQuestion + 1
             : this.state.currentQuestion}
           /{this.props.totalNumOfCards}
-        </Text>
-        {showCard ? (
+        </Text> */}
+        {(this.state.currentQuestion < this.props.totalNumOfCards) ? (
           <FlashCard
             deck={this.props.deck}
             currentQuestion={this.state.currentQuestion}
@@ -86,10 +84,11 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps({ decks }, { match }) {
-  const deckId = match.params.id;
+function mapStateToProps(decks, { route }) {
+  const deckId = route.params.id;
+  const deck = decks[deckId];
   return {
-    deck: decks[deckId],
+    deck,
     totalNumOfCards: deck.questions.length,
     deckId
   };
