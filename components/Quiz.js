@@ -39,16 +39,15 @@ class Quiz extends React.Component {
   };
 
   render() {
-    console.log (this.state.currentQuestion);
     // Add styling
     return (
       <View style={styles.center}>
-        {/* <Text style={styles.count}>
+        <Text style={styles.count}>
           {(this.state.currentQuestion < this.props.totalNumOfCards)
             ? this.state.currentQuestion + 1
             : this.state.currentQuestion}
           /{this.props.totalNumOfCards}
-        </Text> */}
+        </Text>
         {(this.state.currentQuestion < this.props.totalNumOfCards) ? (
           <FlashCard
             deck={this.props.deck}

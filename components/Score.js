@@ -24,7 +24,7 @@ function Score(props) {
 
       <TouchableOpacity
         style={[styles.btn, { backgroundColor: black, marginTop: 25 }]}
-        onPress={this.restart}
+        onPress={() => this.restart}
       >
         <Text style={styles.btnText}>Restart Quiz</Text>
       </TouchableOpacity>

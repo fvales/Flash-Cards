@@ -9,10 +9,11 @@ class FlashCard extends React.Component {
 
   card = this.props.deck !== undefined ? this.props.deck.questions[this.props.currentQuestion] : ''
 
-  toggleShowAnswer() {
+  toggleShowAnswer = () => {
     this.setState({
       showAnswer: !this.state.showAnswer
     });
+    console.log('hhhhh');
   }
 
   render() {
@@ -22,7 +23,7 @@ class FlashCard extends React.Component {
           {this.state.showAnswer ? this.card.answer : this.card.question}
         </Text>
 
-        <TouchableOpacity onPress={this.toggleShowAnswer}>
+        <TouchableOpacity onPress={e => this.toggleShowAnswer}>
           <Text style={styles.reset}>
             {this.state.showAnswer ? "Show Question" : "Show Answer"}
           </Text>
@@ -30,13 +31,13 @@ class FlashCard extends React.Component {
 
         <TouchableOpacity
           style={styles.btn}
-          onPress={this.props.answer("correct")}
+          onPress={e => this.props.answer("correct")}
         >
           <Text style={styles.btnText}>Correct</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.btn, { backgroundColor: red }]}
-          onPress={this.props.answer("incorrect")}
+          onPress={e => this.props.answer("incorrect")}
         >
           <Text style={styles.btnText}>Incorrect</Text>
         </TouchableOpacity>

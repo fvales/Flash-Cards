@@ -37,7 +37,7 @@ class Deck extends React.Component {
         >
           <Text style={styles.btnText}>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        <TouchableOpacity disabled={this.props.totalNumOfCards === 0}
           style={[styles.btn, { backgroundColor: black }]}
           onPress={this.startQuiz}
         >
