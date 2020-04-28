@@ -9,7 +9,8 @@ class Quiz extends React.Component {
   state = {
     totalNumOfCorrectAns: 0,
     totalNumOfIncorrectAns: 0,
-    currentQuestion: 0
+    currentQuestion: 0,
+    showAnswer: false
   };
 
   componentDidMount() {
@@ -23,6 +24,12 @@ class Quiz extends React.Component {
       currentQuestion: 0
     });
   };
+
+  toggleShowAnswer = (result) => {
+    this.setState({
+      showAnswer: result
+    });
+  }
 
   handleAnswer = result => {
     this.setState({
@@ -53,6 +60,8 @@ class Quiz extends React.Component {
             deck={this.props.deck}
             currentQuestion={this.state.currentQuestion}
             answer={this.handleAnswer}
+            showAnswer={this.state.showAnswer}
+            toggleAnswer={this.toggleShowAnswer}
           />
         ) : (
           <Score
@@ -60,6 +69,7 @@ class Quiz extends React.Component {
             incorrect={this.state.totalNumOfIncorrectAns}
             totalNumOfCards={this.props.totalNumOfCards}
             restart={this.restart}
+            deckId={this.props.deckId}
           />
         )}
       </View>

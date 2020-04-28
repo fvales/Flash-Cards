@@ -1,18 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { black, white } from "../utils/colors";
+import { useNavigation } from '@react-navigation/native';
 
 function Score(props) {
   
+  const navigation = useNavigation();
+
   const navigateToDeck = () => {
     // Navigate to deck
-    props.navigation.navigate("Deck", { id: deckId });
+    navigation.navigate("Deck", { id: props.deckId });
   };
-
-  const restart = () => {
-    props.restart();
-    this.navigateToDeck();
-  }
 
   return (
     <View style={styles.center}>
@@ -24,7 +22,7 @@ function Score(props) {
 
       <TouchableOpacity
         style={[styles.btn, { backgroundColor: black, marginTop: 25 }]}
-        onPress={() => this.restart}
+        onPress={() => props.restart()}
       >
         <Text style={styles.btnText}>Restart Quiz</Text>
       </TouchableOpacity>

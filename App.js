@@ -16,7 +16,6 @@ import AddCard from "./components/AddCard";
 import DeckList from "./components/DeckList";
 import Deck from "./components/Deck";
 import Quiz from "./components/Quiz";
-import DeckListCard from "./components/DeckListCard";
 
 const store = createStore(reducer);
 

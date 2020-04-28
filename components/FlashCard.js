@@ -3,29 +3,20 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { red, white, black, blue, orange } from "../utils/colors";
 
 class FlashCard extends React.Component {
-  state = {
-    showAnswer: false,
-  };
 
-  card = this.props.deck !== undefined ? this.props.deck.questions[this.props.currentQuestion] : ''
-
-  toggleShowAnswer = () => {
-    this.setState({
-      showAnswer: !this.state.showAnswer
-    });
-    console.log('hhhhh');
-  }
+  
 
   render() {
+    const card = this.props.deck !== undefined ? this.props.deck.questions[this.props.currentQuestion] : '';
     return (
       <View style={styles.center}>
         <Text style={styles.cardText}>
-          {this.state.showAnswer ? this.card.answer : this.card.question}
+          {this.props.showAnswer ? card.answer : card.question}
         </Text>
 
-        <TouchableOpacity onPress={e => this.toggleShowAnswer}>
+        <TouchableOpacity onPress={e => this.props.toggleAnswer(!this.props.showAnswer)}>
           <Text style={styles.reset}>
-            {this.state.showAnswer ? "Show Question" : "Show Answer"}
+            {this.props.showAnswer ? "Show Question" : "Show Answer"}
           </Text>
         </TouchableOpacity>
 

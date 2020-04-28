@@ -2,26 +2,27 @@ import React from "react";
 import { connect } from "react-redux";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { black, white, gray } from "../utils/colors";
+import { useNavigation } from '@react-navigation/native';
 
 // To Show a Deck in a DeckList
-class DeckListCard extends React.Component {
+function DeckListCard(props) {
+
+  const navigation = useNavigation();
 
   // When Clicked, Navigate to Deck
-  handleOnClick = () => {
-    this.props.navigation.navigate("Deck", {
-      id: this.props.id
+  const handleOnClick = () => {
+    navigation.navigate("Deck", {
+      id: props.id
     });
   };
 
-  render() {
     // Add Styling
     return (
-      <TouchableOpacity style={styles.item} onPress={this.handleOnClick}>
-        <Text style={styles.title}>{this.props.title}</Text>
-        <Text style={styles.count}>{this.props.totalNumOfCards}</Text>
+      <TouchableOpacity style={styles.item} onPress={handleOnClick}>
+        <Text style={styles.title}>{props.title}</Text>
+        <Text style={styles.count}>{props.totalNumOfCards}</Text>
       </TouchableOpacity>
     );
-  }
 }
 
 const styles = StyleSheet.create({
@@ -48,12 +49,11 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(decks, {navigation, id}) {
+function mapStateToProps(decks, {id}) {
   return {
       id,
       title: decks[id].title,
-      totalNumOfCards: decks[id].questions.length,
-      navigation
+      totalNumOfCards: decks[id].questions.length
   }
 }
 

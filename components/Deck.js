@@ -16,9 +16,7 @@ class Deck extends React.Component {
 
   startQuiz = () => {
     // Navigate to start the quiz
-    this.props.totalNumOfCards.length === 0
-      ? alert("Get started by adding few cards!")
-      : this.props.navigation.navigate("Quiz", { id: this.props.deckId });
+    this.props.navigation.navigate("Quiz", { id: this.props.deckId });
   };
 
   componentDidMount() {
