@@ -1,5 +1,4 @@
 import React from "react";
-import ValidationComponent from "react-native-form-validator";
 
 import {
   Text,
@@ -14,18 +13,17 @@ import { saveCard } from "../utils/api";
 import { white, black } from "../utils/colors";
 import { connect } from "react-redux";
 // Add card with question and answer to the deck
-class AddCard extends ValidationComponent {
+class AddCard extends React.Component {
   state = {
     question: "",
     answer: ""
   };
 
   handleOnSubmit = () => {
-    this.validate({
-      name: { minlength: 3, maxlength: 7, required: true },
-      email: { email: true }
-    });
-
+    if(this.state.question === '' || this.state.answer === ''){
+      alert ('Please fill in both the input fields');
+      return 
+  }
     const { id } = this.props.route.params;
     this.props.actions.addCard(id, this.state.question, this.state.answer);
     saveCard(this.props.id, this.state.question, this.state.answer);
@@ -67,7 +65,6 @@ class AddCard extends ValidationComponent {
         >
           <Text style={styles.submitBtnText}>Add card</Text>
         </TouchableOpacity>
-        <Text>{this.getErrorMessages()}</Text>
       </KeyboardAvoidingView>
     );
   }

@@ -1,5 +1,4 @@
 import React from "react";
-import ValidationComponent from "react-native-form-validator";
 
 import {
   Text,
@@ -15,16 +14,16 @@ import { saveDeck } from "../utils/api";
 import { white, black } from "../utils/colors";
 import { connect } from "react-redux";
 // Add a deck with title
-class AddDeck extends ValidationComponent {
+class AddDeck extends React.Component {
   state = {
     nameOfDeck: ""
   };
 
   handleOnSubmit = () => {
-    this.validate({
-      q: { minlength: 3, required: true }
-    });
-
+    if(this.state.nameOfDeck === ''){
+      alert ('Please fill in the input field');
+      return 
+  }
     let deckId = generateUID();
     let newDeck = {
       title: this.state.nameOfDeck,
@@ -46,7 +45,6 @@ class AddDeck extends ValidationComponent {
       >
         <Text style={styles.question}>Name your new deck!</Text>
         <TextInput
-          ref="q"
           value={this.state.nameOfDeck}
           style={styles.input}
           onChangeText={nameOfDeck =>
@@ -55,17 +53,12 @@ class AddDeck extends ValidationComponent {
             })
           }
         />
-        {this.isFieldInError("q") &&
-          this.getErrorsInField("q").map(errorMessage => (
-            <Text>{errorMessage}</Text>
-          ))}
-        <TouchableOpacity
+        <TouchableOpacity 
           style={styles.submitBtn}
           onPress={this.handleOnSubmit}
         >
           <Text style={styles.submitBtnText}>Create Deck</Text>
         </TouchableOpacity>
-        <Text>{this.getErrorMessages()}</Text>
       </KeyboardAvoidingView>
     );
   }
