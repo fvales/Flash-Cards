@@ -13,5 +13,5 @@ This project is a mobile app that allows users to study using collections of fla
 
 ## Project Setup
 
-- install all project dependencies with yarn install
-- start the development server with yarn start
+- install all project dependencies with `yarn install`
+- start the development server with `yarn start`
