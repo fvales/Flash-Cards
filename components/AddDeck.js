@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
+import ValidationComponent from "react-native-form-validator";
+
 import {
   Text,
   TextInput,
@@ -11,19 +13,23 @@ import { bindActionCreators } from "redux";
 import { generateUID } from "../utils/helpers";
 import { saveDeck } from "../utils/api";
 import { white, black } from "../utils/colors";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 // Add a deck with title
-class AddDeck extends React.Component {
+class AddDeck extends ValidationComponent {
   state = {
     nameOfDeck: ""
   };
 
   handleOnSubmit = () => {
+    this.validate({
+      q: { minlength: 3, required: true }
+    });
+
     let deckId = generateUID();
     let newDeck = {
       title: this.state.nameOfDeck,
       questions: []
-    }
+    };
     this.props.actions.addDeck(deckId, newDeck);
     saveDeck(deckId, newDeck);
     this.props.navigation.navigate("Deck", {
@@ -40,18 +46,26 @@ class AddDeck extends React.Component {
       >
         <Text style={styles.question}>Name your new deck!</Text>
         <TextInput
+          ref="q"
           value={this.state.nameOfDeck}
           style={styles.input}
-          onChangeText={(nameOfDeck) => this.setState({
-            nameOfDeck: nameOfDeck
-          })}
+          onChangeText={nameOfDeck =>
+            this.setState({
+              nameOfDeck: nameOfDeck
+            })
+          }
         />
+        {this.isFieldInError("q") &&
+          this.getErrorsInField("q").map(errorMessage => (
+            <Text>{errorMessage}</Text>
+          ))}
         <TouchableOpacity
           style={styles.submitBtn}
           onPress={this.handleOnSubmit}
         >
           <Text style={styles.submitBtnText}>Create Deck</Text>
         </TouchableOpacity>
+        <Text>{this.getErrorMessages()}</Text>
       </KeyboardAvoidingView>
     );
   }

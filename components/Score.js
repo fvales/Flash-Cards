@@ -1,16 +1,21 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { black, white } from "../utils/colors";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import React, { useEffect } from "react";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 function Score(props) {
-  
   const navigation = useNavigation();
 
   const navigateToDeck = () => {
     // Navigate to deck
     navigation.navigate("Deck", { id: props.deckId });
   };
+
+  useEffect(() => {
+    clearLocalNotification().then(setLocalNotification);
+  });
 
   return (
     <View style={styles.center}>
@@ -36,7 +41,6 @@ function Score(props) {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   center: {
